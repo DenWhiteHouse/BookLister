@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">BookLister</string>
 
-    <string name="action_add_book">Add a bookr</string>
+    <string name="action_add_book">Add a book</string>
+    <string name="book_cover">book cover</string>
+    <string name="book_title">book title</string>
+    <string name="book_author">book author</string>
+    <string name="book_pages">book author</string>
+
+    <string name="message_add_new_book">Add a new book</string>
+    <string name="hint_search_book">insert the title here</string>
+    <string name="button_search_book">Search book</string>
+    <string name="button_save_book">Save Book</string>
 </resources>
