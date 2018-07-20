@@ -56,7 +56,7 @@ public class SaleInfo implements Parcelable
         this.listPrice = ((ListPrice) in.readValue((ListPrice.class.getClassLoader())));
         this.retailPrice = ((RetailPrice) in.readValue((RetailPrice.class.getClassLoader())));
         this.buyLink = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.offers, (Book.Offer.class.getClassLoader()));
+        in.readList(this.offers, (Offer.class.getClassLoader()));
     }
 
     public SaleInfo() {
