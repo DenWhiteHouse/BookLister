@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BookLister</string>
+
+    <string name="action_add_book">Add a bookr</string>
 </resources>
