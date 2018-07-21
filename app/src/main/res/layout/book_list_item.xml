@@ -8,7 +8,7 @@
     android:padding="@dimen/padding_medium">
 
     <ImageView
-        android:id="@+id/bookImageLibrary"
+        android:id="@+id/bookImage"
         android:layout_width="@dimen/bookImage"
         android:layout_height="@dimen/bookImage"
         android:contentDescription="@string/book_cover" />
@@ -28,7 +28,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/bookTitleLibrary"
+            android:id="@+id/bookTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black"
@@ -42,7 +42,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/bookAuthorLibrary"
+            android:id="@+id/bookAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black" />
@@ -55,7 +55,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/bookPagesLibrary"
+            android:id="@+id/bookPages"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/black" />
