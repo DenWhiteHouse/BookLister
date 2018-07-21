@@ -4,9 +4,9 @@
     <string name="action_add_book">Add a book</string>
     <string name="add_book_activity_label">Add a book</string>
     <string name="book_cover">book cover</string>
-    <string name="book_title">book title</string>
-    <string name="book_author">book author</string>
-    <string name="book_pages">book pages</string>
+    <string name="book_title">Book Title</string>
+    <string name="book_author">Book Author</string>
+    <string name="book_pages">Book Pages</string>
 
     <string name="message_add_new_book">Add a new book</string>
     <string name="hint_search_book">insert the title here</string>
