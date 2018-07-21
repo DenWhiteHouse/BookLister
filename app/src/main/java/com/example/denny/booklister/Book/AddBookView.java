@@ -34,9 +34,7 @@ public class AddBookView extends AppCompatActivity implements AddBookPresenter.V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_book);
         ButterKnife.bind(this);
-        mAdapter = new BookAdapter(this);
         setViewButtons();
-        setRecyclerView();
     }
 
     public void setRecyclerView(){
@@ -58,7 +56,6 @@ public class AddBookView extends AppCompatActivity implements AddBookPresenter.V
                     Toast.makeText(getApplicationContext(), R.string.warning_missing_title, Toast.LENGTH_SHORT).show();
                 } else {
                     mPresenter.fetchBookAPIResults(mEditText.getText().toString());
-                    updateResults();
                 }
             }
         });
@@ -66,6 +63,8 @@ public class AddBookView extends AppCompatActivity implements AddBookPresenter.V
 
     @Override
     public void updateResults() {
-        mAdapter.setBooks(mPresenter.mBook);
+        mAdapter = new BookAdapter(this);
+        setRecyclerView();
+        mAdapter.setBook(mPresenter.mBook);
     }
 }

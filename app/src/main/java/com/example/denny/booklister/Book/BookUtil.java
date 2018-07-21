@@ -15,15 +15,21 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BookUtil {
+    /*
+    As the Book Object has many others information not needed for this logic
+    BookUtil will play as middleModel adjusting the Book Object and the Retrofit Call
+     */
+    AddBookPresenter mPresenter;
     Book mBook;
     Context mContext;
 
-    public BookUtil(Context context){
+    public BookUtil(Context context, AddBookPresenter presenter){
         mContext = context;
         mBook = new Book();
+        mPresenter = presenter;
     }
 
-    public Book getBookJSON(String bookTitle) {
+    public void getBookJSON(String bookTitle) {
         //Getting the JSON Object with Retrofit
         BooksInterface booksInterface = RetrofitClient.getRetrofitInstance();
         Call<Book> book = booksInterface.getBooks(bookTitle);
@@ -31,9 +37,12 @@ public class BookUtil {
         book.enqueue(new Callback<Book>() {
             @Override
             public void onResponse(Call<Book> call, Response<Book> response) {
-                if (response.isSuccessful() && response.body().getItems() != null) {
-                    mBook = response.body();
+                if (response.isSuccessful()){
+                if(response.body().getItems() != null) {
+                    mPresenter.mBook = response.body();
+                    mPresenter.mView.updateResults();
                     }
+                }
             }
 
             @Override
@@ -43,7 +52,6 @@ public class BookUtil {
             }
         });
 
-        return mBook;
     }
 
 }

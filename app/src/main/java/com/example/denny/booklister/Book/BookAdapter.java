@@ -31,9 +31,24 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     @Override
     public void onBindViewHolder(final BookViewHolder holder, int position) {
-        holder.mTitle.setText(mBook.getItems().get(position).getVolumeInfo().getTitle().toString());
-        holder.mAuthor.setText(mBook.getItems().get(position).getVolumeInfo().getAuthors().get(0).toString());
-        holder.mPages.setText(mBook.getItems().get(position).getVolumeInfo().getPageCount().toString());
+        if(!mBook.getItems().get(position).getVolumeInfo().getTitle().isEmpty()) {
+            holder.mTitle.setText(mBook.getItems().get(position).getVolumeInfo().getTitle());
+        }
+        else{
+            holder.mTitle.setText("");
+        }
+        if(mBook.getItems().get(position).getVolumeInfo().getAuthors() != null) {
+            holder.mAuthor.setText(mBook.getItems().get(position).getVolumeInfo().getAuthors().get(0));
+        }
+        else{
+            holder.mAuthor.setText("");
+        }
+        if(!mBook.getItems().get(position).getVolumeInfo().getPageCount().toString().isEmpty()) {
+            holder.mPages.setText(mBook.getItems().get(position).getVolumeInfo().getPageCount().toString());
+        }
+        else{
+            holder.mPages.setText("");
+        }
     }
 
     @Override

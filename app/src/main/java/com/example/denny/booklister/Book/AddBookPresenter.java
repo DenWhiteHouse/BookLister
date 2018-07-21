@@ -15,15 +15,15 @@ public class AddBookPresenter {
     View mView;
 
     public AddBookPresenter(Context context, View view){
-        mBookUtil = new BookUtil(context);
         mContext =context;
         mView =view;
+        mBookUtil = new BookUtil(context,this);
     }
 
     public void fetchBookAPIResults(String bookTitle){
-     mBook = mBookUtil.getBookJSON(bookTitle);
+        mBookUtil.getBookJSON(bookTitle);
     }
-    
+
     public interface View{
         void updateResults();
     }
