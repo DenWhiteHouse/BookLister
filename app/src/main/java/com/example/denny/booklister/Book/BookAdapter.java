@@ -16,7 +16,7 @@ import java.util.List;
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder>{
 
     private Context mContext;
-    private List<Book> mBookList;
+    private Book mBook;
 
     public BookAdapter(Context context){
         mContext = context;
@@ -31,33 +31,28 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     @Override
     public void onBindViewHolder(final BookViewHolder holder, int position) {
-        final Book book = mBookList.get(position);
-        final Integer listposition = position;
-        holder.mTitle.setText(book.getItems().get(0).getVolumeInfo().getTitle().toString());
-        holder.mAuthor.setText(book.getItems().get(0).getVolumeInfo().getAuthors().get(0).toString());
-        holder.mPages.setText(book.getItems().get(0).getVolumeInfo().getPageCount().toString());
+        holder.mTitle.setText(mBook.getItems().get(position).getVolumeInfo().getTitle().toString());
+        holder.mAuthor.setText(mBook.getItems().get(position).getVolumeInfo().getAuthors().get(0).toString());
+        holder.mPages.setText(mBook.getItems().get(position).getVolumeInfo().getPageCount().toString());
     }
 
     @Override
     public int getItemCount() {
-        if (mBookList == null) {
+        if (mBook == null) {
             return 0;
         }
-        return mBookList.size();
+        return mBook.getItems().size();
     }
 
     /**
      * When data changes, this method updates the list of books
      * and notifies the adapter to use the new values on it
      */
-    public void setBooks(List<Book> books) {
-        mBookList = books;
+    public void setBook(Book book) {
+        mBook = book;
         notifyDataSetChanged();
     }
 
-    public List<Book> getBookList() {
-        return mBookList;
-    }
 
     class BookViewHolder extends RecyclerView.ViewHolder {
         private TextView mTitle;

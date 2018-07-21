@@ -5,8 +5,11 @@ import android.view.View;
 
 import com.example.denny.booklister.BookData.Book;
 
+import java.util.List;
+
 public class AddBookPresenter {
     Book mBook;
+    List<Book> mBookList;
     BookUtil mBookUtil;
     Context mContext;
     View mView;
@@ -18,9 +21,9 @@ public class AddBookPresenter {
     }
 
     public void fetchBookAPIResults(String bookTitle){
-     mBookUtil.getBookJSON(bookTitle);
+     mBook = mBookUtil.getBookJSON(bookTitle);
     }
-
+    
     public interface View{
         void updateResults();
     }
