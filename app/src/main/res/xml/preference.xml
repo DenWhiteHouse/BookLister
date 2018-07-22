@@ -8,4 +8,12 @@
         android:summaryOff="hidden"
         android:title="show_name"
     />
+
+    <ListPreference
+        android:defaultValue="@string/language_list_item_value_english"
+        android:key="@string/language_list_key"
+        android:entries="@array/pref_language_labels"
+        android:entryValues="@array/pref_language_values"
+        android:title="@string/language_list_label"
+        />
 </PreferenceScreen>
