@@ -12,15 +12,16 @@ import android.widget.TextView;
 
 import com.example.denny.booklister.Book.AddBookView;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
+    private static SharedPreferences sharedPreferences;
+    private TextView mainTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        TextView mainTextView = findViewById(R.id.main_text);
-        mainTextView.setText(String.valueOf(sharedPreferences.getBoolean("show_name",true)));
+        mainTextView = findViewById(R.id.main_text);
+        setSharedPreferences();
+
     }
 
     @Override
@@ -51,5 +52,23 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    private void setSharedPreferences(){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
+        if (s.equals("show_name")){
+            mainTextView.setText(String.valueOf(sharedPreferences.getBoolean("show_name",true)));
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
+        super.onDestroy();
     }
 }
