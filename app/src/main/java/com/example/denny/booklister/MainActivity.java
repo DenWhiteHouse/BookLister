@@ -15,17 +15,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //setting the Toolbar
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.my_toolbar, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
@@ -34,8 +29,14 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_add_book:
                 // User action add a book to the Library
-                Intent intent = new Intent(this, AddBookView.class);
-                startActivity(intent);
+                Intent startAddBookActivity = new Intent(this, AddBookView.class);
+                startActivity(startAddBookActivity);
+                return true;
+
+            case R.id.action_settings:
+                // Selection of Settings
+                Intent startSettingsActivity = new Intent(this, SettingsActvity.class);
+                startActivity(startSettingsActivity);
                 return true;
 
             default:

@@ -15,4 +15,6 @@
 
     <string name="error_message_retrofit">Error contacting the server.Please try again.</string>
     <string name="warning_missing_title">Please, insert a title</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
