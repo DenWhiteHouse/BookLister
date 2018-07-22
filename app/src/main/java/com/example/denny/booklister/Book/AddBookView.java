@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.denny.booklister.R;
@@ -22,6 +23,8 @@ public class AddBookView extends AppCompatActivity implements AddBookPresenter.V
     Button mSearchButton;
     @BindView(R.id.bookResults_RecyclerView)
     RecyclerView mRecyclerView;
+    @BindView(R.id.add_book_progress_bar)
+    ProgressBar mProgressBar;
     private AddBookPresenter mPresenter;
     private BookAdapter mAdapter;
 
@@ -53,8 +56,10 @@ public class AddBookView extends AppCompatActivity implements AddBookPresenter.V
             @Override
             public void onClick(View view) {
                 if (mEditText.getText().toString().isEmpty()) {
+                    mRecyclerView.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), R.string.warning_missing_title, Toast.LENGTH_SHORT).show();
                 } else {
+                    setProgressBarVisibile();
                     mPresenter.fetchBookAPIResults(mEditText.getText().toString());
                 }
             }
@@ -66,5 +71,16 @@ public class AddBookView extends AppCompatActivity implements AddBookPresenter.V
         mAdapter = new BookAdapter(this);
         setRecyclerView();
         mAdapter.setBook(mPresenter.mBook);
+        setProgressBarVisibilityGone();
+    }
+
+    public void setProgressBarVisibile(){
+        mProgressBar.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
+    }
+
+    public void setProgressBarVisibilityGone(){
+        mProgressBar.setVisibility(View.GONE);
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
 }
