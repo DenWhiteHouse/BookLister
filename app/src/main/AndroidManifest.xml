@@ -38,6 +38,13 @@
         <service android:name=".Service.ReminderIntentService"
             android:exported="false"/>
 
+        <service android:name=".Service.ReminderFirebaseJobService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

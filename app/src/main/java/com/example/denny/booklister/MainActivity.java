@@ -19,6 +19,7 @@ import com.example.denny.booklister.Book.AddBookView;
 import com.example.denny.booklister.Notification.NotificationUtils;
 import com.example.denny.booklister.Service.ReminderIntentService;
 import com.example.denny.booklister.Service.ReminderTasks;
+import com.example.denny.booklister.Service.ReminderUtilities;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static SharedPreferences sharedPreferences;
@@ -48,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 testNotification(view);
             }
         });
+
+        //set the Reminder with FirebaseJobService
+        ReminderUtilities.scheduleReminder(this);
 
     }
 

@@ -11,6 +11,8 @@ public class ReminderTasks {
     public static final String ACTION_BACKGROUND = "action-background";
     public static final String ACTION_EDIT_TEXT = "action-edit-text";
     public static final String ACTION_DISMISS_NOTIFICATION = "dismiss-notification";
+    public static final String ACTION_REMINDER = "action-minder";
+
     private static Context mContext;
 
     public ReminderTasks(Context context){
@@ -22,14 +24,20 @@ public class ReminderTasks {
         if (ACTION_DISMISS_NOTIFICATION.equals(action)) {
             NotificationUtils.clearAllNotifications(context);
         } else if (ACTION_EDIT_TEXT.equals(action)) {
-            {
+
             Intent intent = new Intent(context,AddBookView.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
             NotificationUtils.clearAllNotifications(context);
-        }}
+        } else if (ACTION_REMINDER.equals(action)) {
+            issueReminder(context);
+            }
         else{
             MainActivity.editMainTextInBackgroud();
             }
         }
+
+    private static void issueReminder(Context context) {
+        NotificationUtils.remindUserBecauseCharging(context);
+    }
 }
