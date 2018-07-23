@@ -9,10 +9,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.denny.booklister.Book.AddBookView;
+import com.example.denny.booklister.Notification.NotificationUtils;
 import com.example.denny.booklister.Service.ReminderIntentService;
 import com.example.denny.booklister.Service.ReminderTasks;
 
@@ -20,18 +23,30 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private static SharedPreferences sharedPreferences;
     private static TextView mainTextView;
     private static Context mContext;
+    private static Button mNotificationButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainTextView = findViewById(R.id.main_text);
+        mNotificationButton =findViewById(R.id.notification_button);
         setSharedPreferences();
         mContext=getApplicationContext();
+
+        //Learning Code for backgroud features
 
         //Trying Backgroud Task
         Intent intent = new Intent(this, ReminderIntentService.class);
         intent.setAction(ReminderTasks.ACTION_EDIT_TEXT);
         startService(intent);
+
+        //Binding button for testing Notification
+        mNotificationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                testNotification(view);
+            }
+        });
 
     }
 
@@ -85,5 +100,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     synchronized public static void showBackGroundToast(){
         mainTextView.setText("background");
+    }
+
+    public void testNotification(View view) {
+        NotificationUtils.remindUserBecauseCharging(this);
     }
 }
