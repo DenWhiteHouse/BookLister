@@ -32,4 +32,11 @@
     <string name="error_message_retrofit">Error contacting the server.Please try again.</string>
     <string name="warning_missing_title">Please, insert a title</string>
 
+    <!-- Services and Notification -->
+    <string name="notification_title">Got a new book?</string>
+    <string name="notification_description">Add it to your library</string>
+    <string name="notification_action_YES">YES, ADD IT</string>
+    <string name="notification_action_NO">NO, THANKS</string>
+
+
 </resources>

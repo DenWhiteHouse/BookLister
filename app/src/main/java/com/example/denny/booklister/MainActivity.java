@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.UiThread;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         //Trying Backgroud Task
         Intent intent = new Intent(this, ReminderIntentService.class);
-        intent.setAction(ReminderTasks.ACTION_EDIT_TEXT);
+        intent.setAction(ReminderTasks.ACTION_BACKGROUND);
         startService(intent);
 
         //Binding button for testing Notification
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         super.onDestroy();
     }
 
-    synchronized public static void showBackGroundToast(){
+    synchronized public static void editMainTextInBackgroud(){
         mainTextView.setText("background");
     }
 

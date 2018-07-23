@@ -50,10 +50,8 @@ public class NotificationUtils {
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setSmallIcon(R.drawable.ic_add_white_24dp)
                 .setLargeIcon(largeIcon(context))
-                .setContentTitle("notification title")
-                .setContentText("notification body")
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(
-                        "NOTIFICATION"))
+                .setContentTitle(context.getString(R.string.notification_title))
+                .setContentText(context.getString(R.string.notification_description))
                 .setContentIntent(contentIntent(context))
                 .addAction(setTextAction(context))
                 .addAction(ignoreReminderAction(context))
@@ -84,7 +82,7 @@ public class NotificationUtils {
                 PendingIntent.FLAG_CANCEL_CURRENT);
         // COMPLETED (15) Create an Action for the user to tell us they've had a glass of water
         NotificationCompat.Action setText = new NotificationCompat.Action(R.drawable.ic_add_white_24dp,
-                "I did it!",
+                context.getString(R.string.notification_action_YES),
                 setTextPendingIntent);
         // COMPLETED (16) Return the action
         return setText;
@@ -105,7 +103,7 @@ public class NotificationUtils {
                 PendingIntent.FLAG_UPDATE_CURRENT);
         // COMPLETED (9) Create an Action for the user to ignore the notification (and dismiss it)
         NotificationCompat.Action ignoreReminderAction = new NotificationCompat.Action(R.drawable.ic_add_white_24dp,
-                "No, thanks.",
+                context.getString(R.string.notification_action_NO),
                 ignoreReminderPendingIntent);
         // COMPLETED (10) Return the action
         return ignoreReminderAction;
