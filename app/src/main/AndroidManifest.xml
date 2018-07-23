@@ -35,6 +35,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.denny.booklister.MainActivity" />
         </activity>
+        <service android:name=".Service.ReminderIntentService"
+            android:exported="false"/>
+
     </application>
 
 </manifest>

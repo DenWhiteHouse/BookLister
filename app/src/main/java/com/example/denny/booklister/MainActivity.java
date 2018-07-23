@@ -1,5 +1,6 @@
 package com.example.denny.booklister;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -9,18 +10,28 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.denny.booklister.Book.AddBookView;
+import com.example.denny.booklister.Service.ReminderIntentService;
+import com.example.denny.booklister.Service.ReminderTasks;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static SharedPreferences sharedPreferences;
-    private TextView mainTextView;
+    private static TextView mainTextView;
+    private static Context mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainTextView = findViewById(R.id.main_text);
         setSharedPreferences();
+        mContext=getApplicationContext();
+
+        //Trying Backgroud Task
+        Intent intent = new Intent(this, ReminderIntentService.class);
+        intent.setAction(ReminderTasks.ACTION_EDIT_TEXT);
+        startService(intent);
 
     }
 
@@ -70,5 +81,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     protected void onDestroy() {
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
         super.onDestroy();
+    }
+
+    synchronized public static void showBackGroundToast(){
+        mainTextView.setText("background");
     }
 }
