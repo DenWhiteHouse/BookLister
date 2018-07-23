@@ -1,19 +1,18 @@
 package com.example.denny.booklister;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.annotation.UiThread;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.denny.booklister.Book.AddBookView;
 import com.example.denny.booklister.Notification.NotificationUtils;
@@ -26,6 +25,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private static TextView mainTextView;
     private static Context mContext;
     private static Button mNotificationButton;
+
+    //I won't use the manifest, I'll we add a Dynamic Broadcast Receiver
+    IntentFilter mChargingintentFiler;
+    BroadcastReceiver mChargingBroadcastReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,13 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         mNotificationButton =findViewById(R.id.notification_button);
         setSharedPreferences();
         mContext=getApplicationContext();
+
+        //Inizialized the INTENT FILTER fo filtering charging status
+        mChargingintentFiler = new IntentFilter();
+        mChargingintentFiler.addAction(Intent.ACTION_POWER_CONNECTED);
+
+        //inizialized the Broadcastreceiver with the custom one
+        mChargingBroadcastReceiver = new CharchingBroadcastReceiver();
 
         //Learning Code for backgroud features
 
@@ -109,5 +119,34 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     public void testNotification(View view) {
         NotificationUtils.remindUserBecauseCharging(this);
+    }
+
+    public void updateMainTextBecauseOfBroadcastReceiver() {
+        mainTextView.setText("boradcast receiver got and intent because charging status");
+    }
+
+    //Defyining my BroadcastReceiver
+    private class CharchingBroadcastReceiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Intent.ACTION_POWER_CONNECTED)){
+                updateMainTextBecauseOfBroadcastReceiver();
+            }
+        }
+    }
+
+    //Remember that receivers must be registered on Resume and Unregistered onPause
+    //Because the UI doesn't need to be updated when the UI is not in foreground
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(mChargingBroadcastReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(mChargingBroadcastReceiver,mChargingintentFiler);
     }
 }

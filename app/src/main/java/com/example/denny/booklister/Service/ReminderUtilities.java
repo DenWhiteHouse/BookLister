@@ -39,10 +39,6 @@ public class ReminderUtilities {
                 .build();
 
         dispatcher.schedule(constraintReminderJob);
-        dispatcher.schedule(constraintReminderJob);
         sInitialized = true;
 
-    }
-
-
-    }
+    }}
