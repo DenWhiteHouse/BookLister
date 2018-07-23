@@ -1,12 +1,16 @@
 package com.example.denny.booklister;
 
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -148,5 +152,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     protected void onResume() {
         super.onResume();
         registerReceiver(mChargingBroadcastReceiver,mChargingintentFiler);
+        /* If you want to check the entry status of the phone
+        based on the API (>23 or <23) can be used a BatteryManager or
+        a stricky Intent to check the BatteryStatus when Resuming the Activity
+         */
     }
 }
